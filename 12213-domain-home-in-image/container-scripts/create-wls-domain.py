@@ -6,9 +6,7 @@
 # WebLogic on Docker Default Domain
 #
 # Domain, as defined in DOMAIN_NAME, will be created in this script. Name defaults to 'base_domain'.
-#
-# Since : November, 2018
-# Author: monica.riccelli@oracle.com
+
 # ==============================================
 
 import os
