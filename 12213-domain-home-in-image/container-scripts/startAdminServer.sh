@@ -61,9 +61,9 @@ function check_wls {
 export AS_HOME="${DOMAIN_HOME}/servers/${ADMIN_NAME}"
 export AS_SECURITY="${AS_HOME}/security"
 
-if [  -f ${AS_HOME}/logs/${ADMIN_NAME}.log ]; then
-    exit
-fi
+#if [  -f ${AS_HOME}/logs/${ADMIN_NAME}.log ]; then
+#    exit
+#fi
 
 echo "Admin Server Home: ${AS_HOME}"
 echo "Admin Server Security: ${AS_SECURITY}"
