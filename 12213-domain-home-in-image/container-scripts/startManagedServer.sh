@@ -9,9 +9,9 @@
 export MS_HOME="${DOMAIN_HOME}/servers/${MANAGED_SERV_NAME}"
 export MS_SECURITY="${MS_HOME}/security"
 
-#if [ -f ${MS_HOME}/logs/${MANAGED_SERV_NAME}.log ]; then
-#   exit
-#fi
+if [ -f ${MS_HOME}/logs/${MANAGED_SERV_NAME}.log ]; then
+   exit
+fi
 
 # Wait for AdminServer to become available for any subsequent operation
 /u01/oracle/waitForAdminServer.sh

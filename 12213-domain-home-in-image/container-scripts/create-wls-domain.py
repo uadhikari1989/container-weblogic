@@ -1,4 +1,3 @@
-
 #Copyright (c) 2014, 2020, Oracle and/or its affiliates.
 #
 #Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
@@ -6,9 +5,6 @@
 # WebLogic on Docker Default Domain
 #
 # Domain, as defined in DOMAIN_NAME, will be created in this script. Name defaults to 'base_domain'.
-#
-# Since : November, 2018
-# Author: monica.riccelli@oracle.com
 # ==============================================
 
 import os

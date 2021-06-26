@@ -5,9 +5,7 @@
 # WebLogic on Docker Default Domain
 #
 # Domain, as defined in DOMAIN_NAME, will be created in this script. Name defaults to 'base_domain'.
-#
-# Since : October, 2014
-# Author: monica.riccelli@oracle.com
+
 # ==============================================
 domain_name  = os.environ.get("DOMAIN_NAME", "base_domain")
 admin_name  = os.environ.get("ADMIN_NAME", "AdminServer")

@@ -61,34 +61,34 @@ function check_wls {
 export AS_HOME="${DOMAIN_HOME}/servers/${ADMIN_NAME}"
 export AS_SECURITY="${AS_HOME}/security"
 
-#if [  -f ${AS_HOME}/logs/${ADMIN_NAME}.log ]; then
-#    exit
-#fi
+if [  -f ${AS_HOME}/logs/${ADMIN_NAME}.log ]; then
+    exit
+fi
 
 echo "Admin Server Home: ${AS_HOME}"
 echo "Admin Server Security: ${AS_SECURITY}"
 
-SEC_PROPERTIES_FILE=${PROPERTIES_FILE_DIR}/security.properties
-if [ ! -e "${SEC_PROPERTIES_FILE}" ]; then
-   echo "A security.properties file with the username and password needs to be supplied."
-   exit
-fi
-
-# Get Username
-USER=`awk '{print $1}' ${SEC_PROPERTIES_FILE} | grep username | cut -d "=" -f2`
-if [ -z "${USER}" ]; then
-   echo "The domain username is blank.  The Admin username must be set in the properties file."
-   exit
-fi
-# Get Password
-PASS=`awk '{print $1}' ${SEC_PROPERTIES_FILE} | grep password | cut -d "=" -f2`
-if [ -z "${PASS}" ]; then
-   echo "The domain password is blank.  The Admin password must be set in the properties file."
-   exit
-fi
+#SEC_PROPERTIES_FILE=${PROPERTIES_FILE_DIR}/security.properties
+#if [ ! -e "${SEC_PROPERTIES_FILE}" ]; then
+#   echo "A security.properties file with the username and password needs to be supplied."
+#   exit
+#fi
+#
+## Get Username
+#USER=`awk '{print $1}' ${SEC_PROPERTIES_FILE} | grep username | cut -d "=" -f2`
+#if [ -z "${USER}" ]; then
+#   echo "The domain username is blank.  The Admin username must be set in the properties file."
+#   exit
+#fi
+## Get Password
+#PASS=`awk '{print $1}' ${SEC_PROPERTIES_FILE} | grep password | cut -d "=" -f2`
+#if [ -z "${PASS}" ]; then
+#   echo "The domain password is blank.  The Admin password must be set in the properties file."
+#   exit
+#fi
 
 #Define Java Options
-JAVA_OPTIONS=`awk '{print $1}' ${SEC_PROPERTIES_FILE} | grep ^JAVA_OPTIONS= | cut -d "=" -f2-`
+JAVA_OPTIONS=${WEBLOGIC_JAVA_OPTIONS}
 if [ -z "${JAVA_OPTIONS}" ]; then
    JAVA_OPTIONS="-Dweblogic.StdoutDebugEnabled=false"
 fi
@@ -96,8 +96,8 @@ export JAVA_OPTIONS=${JAVA_OPTIONS}
 
 # Create domain
 mkdir -p ${AS_SECURITY}
-echo "username=${USER}" >> ${AS_SECURITY}/boot.properties
-echo "password=${PASS}" >> ${AS_SECURITY}/boot.properties
+echo "username=${ADMIN_SERVER_USERNAME}" >> ${AS_SECURITY}/boot.properties
+echo "password=${ADMIN_SERVER_PASSWORD}" >> ${AS_SECURITY}/boot.properties
 ${DOMAIN_HOME}/bin/setDomainEnv.sh
 
 #echo 'Running Admin Server in background'
