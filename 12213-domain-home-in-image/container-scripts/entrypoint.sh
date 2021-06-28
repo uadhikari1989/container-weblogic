@@ -27,13 +27,20 @@ env
 
 
 #pushd ${DOMAIN_HOME}
-pushd /u01/oracle/custom-configs/
+pushd /u01/oracle/custom-configs
+        ./startAdminServer.sh
+popd
 
-	startAdminServer.sh
+pushd ${DOMAIN_HOME}/bin
+        ./startNodeManager.sh
+popd
 
-popd 
+# Loop over MSs:
+#       startManagedServer.sh CS_MS1
+#
+
+# Call modified version of create-wls-domain.modified.py (rename) that does the JMS/Datasource, etc.
 
 
 
-#/u01/oracle/custom-configs/createWLSDomain.sh AFTER
-
+# Copy the ear files into the image... start deployment
