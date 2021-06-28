@@ -5,7 +5,6 @@
 # WebLogic on Docker Default Domain
 #
 # Domain, as defined in DOMAIN_NAME, will be created in this script. Name defaults to 'base_domain'.
-#
 # ==============================================
 
 import os
@@ -47,7 +46,6 @@ machine_name                          = os.environ.get("MACHINE_NAME")
 
 managed_server_needs_jms_string_array = os.environ.get("MANAGED_SERVER_NEEDS_JMS")
 managed_server_needs_jms_array        = managed_server_needs_jms_string_array.split()
-
 
 dsname                                = os.environ.get("DS_NAME")
 dsjndiname                            = os.environ.get("DS_JNDI_NAME")
@@ -94,7 +92,7 @@ for port in managed_server_needs_jms_array:
   name = port
   print('managed_server_needs_jms_array element is %s' % name);
 
-# Open default domain template
+  # Open default domain template
 # ============================
 readTemplate("/u01/oracle/wlserver/common/templates/wls/wls.jar")
 
@@ -110,7 +108,6 @@ cd('/Servers/AdminServer')
 #set('ListenAddress', '%s-%s' % (domain_uid, admin_server_name_svc))
 set('ListenPort', admin_port)
 set('Name', admin_server_name)
-
 
 create('T3Channel', 'NetworkAccessPoint')
 cd('/Servers/%s/NetworkAccessPoints/T3Channel' % admin_server_name)
@@ -153,6 +150,15 @@ if (machine_name != ""):
 print "Done with Machine Creation"
 
 
+# Set NodeManager Properties to Plain SSL
+# =======================================
+#cd('/Machines/' + machine_name + '/NodeManager/' + machine_name)
+#cmo.setNMType('Plain')
+#cmo.setListenAddress('localhost')
+#cmo.setDebugEnabled(false)
+#cmo.setListenPort(5556)
+
+
 
 # Create Node Manager
 # ===================
@@ -174,7 +180,6 @@ for server in managed_server_name_array:
 
   print('server_port : [%s]' % server_port);
 
-
   set('ListenPort', server_port)
   set('NumOfRetriesBeforeMSIMode', 0)
   set('RetryIntervalBeforeMSIMode', 1)
@@ -185,12 +190,6 @@ for server in managed_server_name_array:
     cd('/Servers/' + name+ '/SSL/' + name)
     set('ListenPort', managed_server_ssl_port)
     set('Enabled', 'True')
-
-
-
-
-
-
 
 
 
@@ -225,17 +224,9 @@ exit()
 #exit()
 #
 
-
-
-
-
-
-
-
-
-####################################################################################################################################
+##############################################################################################################################                                                                ######
 # You will need to be connected to a running server to execute the following commands:
-####################################################################################################################################
+##############################################################################################################################                                                                ######
 #
 #for server in managed_server_name_array:
 #  index = managed_server_name_array.index(server)
@@ -274,7 +265,7 @@ exit()
 #
 #    cd('/')
 #    assign('JMSServer', jmsserver_name, 'Target', server)
-#
+
 #  # Create a JMS System resource
 #  # ============================
 #  cd('/')
@@ -297,7 +288,7 @@ exit()
 #  assign('JMSSystemResource.SubDeployment', 'jmsmodule2.DockerQueueSubDeployment', 'Target', 'jmsserver-ms2')
 
 
-####################################################################################################################################
+##############################################################################################################################                                                                ######
 #
 #
 #
@@ -350,3 +341,5 @@ exit()
 ## ======
 ## Uncomment to target and enable the data source for the cluster
 #assign('JDBCSystemResource', dsname, 'Target', 'CS_MS1')
+
+
